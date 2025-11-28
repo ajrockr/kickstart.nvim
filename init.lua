@@ -371,6 +371,13 @@ require('lazy').setup({
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
+      'hrsh7th/nvim-cmp',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'L3M0N4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -573,8 +580,71 @@ require('lazy').setup({
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+
+        intelephense = {
+          settings = {
+            intelephense = {
+              stubs = {
+                'apache',
+                'bcmath',
+                'bz2',
+                'calendar',
+                'com_dotnet',
+                'Core',
+                'ctype',
+                'curl',
+                'date',
+                'dba',
+                'dom',
+                'exif',
+                'fileinfo',
+                'filter',
+                'fpm',
+                'ftp',
+                'gd',
+                'hash',
+                'iconv',
+                'imap',
+                'intl',
+                'jason',
+                'ldap',
+                'libxml',
+                'mbstring',
+                'mysql',
+                'mysqli',
+                'password',
+                'pcntl',
+                'pcre',
+                'PDO',
+                'pdo_mysql',
+                'Phar',
+                'posix',
+                'readline',
+                'Reflection',
+                'session',
+                'SimpleXML',
+                'soap',
+                'sockets',
+                'sodium',
+                'SPL',
+                'sqlite3',
+                'standard',
+                'sysvsem',
+                'sysvshm',
+                'tokenizer',
+                'xml',
+                'xmlreader',
+                'xmlwriter',
+                'xsl',
+                'zip',
+                'zlib',
+              },
+              files = {
+                maxSize = 5000000,
+              },
             },
           },
         },
@@ -600,7 +670,7 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        ensure_installed = vim.tbl_keys(servers), -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
         handlers = {
           function(server_name)
